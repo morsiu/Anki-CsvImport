@@ -99,14 +99,19 @@ class NoteModel(object):
 class Note(object):
     "Represents a note"
     def __init__(self, fields, deck, model, anki_collection):
-        self.fields = fields,
-        self.deck = deck,
-        self.model = model,
+        self.fields = fields
+        self.deck = deck
+        self.model = model
         self.anki_collection = anki_collection
 
     def add_to_anki_collection(self):
         "Adds note to the anki collection"
-        pass
+        anki_deck = self.deck.anki_deck()
+        anki_model = self.model.anki_model()
+        self.anki_collection.models.setCurrent(anki_model)
+        anki_note = anki_deck.newNote()
+        self.fields.fill(anki_note)
+        anki_deck.addNote(anki_note)
 
 class NoteField(object):
     "Represent a note field, with name and value"

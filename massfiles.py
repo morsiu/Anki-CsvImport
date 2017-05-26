@@ -3,23 +3,21 @@ import csv
 
 class MassFile(object):
     "Represents file containing notes, of many decks and note types"
-    def __init__(self, filepath, note_maps_by_names, anki_collection):
+    def __init__(self, filepath, note_maps_by_names):
         self.filepath = filepath
         self.note_maps_by_names = note_maps_by_names
-        self.anki_collection = anki_collection
 
     def notes(self):
         "Returns sequence of notes read from the file"
         for record in CsvFile(str(self.filepath)).records():
-            for note in MassRecord(record, self.note_maps_by_names, self.anki_collection).notes():
+            for note in MassRecord(record, self.note_maps_by_names).notes():
                 yield note
 
 class MassRecord(object):
     "Represents a record in mass file, containing multiple notes"
-    def __init__(self, record, note_maps_by_names, anki_collection):
+    def __init__(self, record, note_maps_by_names):
         self.record = record
         self.note_maps_by_names = note_maps_by_names
-        self.anki_collection = anki_collection
 
     def notes(self):
         "Returns notes contained within the record"
@@ -40,19 +38,17 @@ class NotesMap(object):
 
 class NoteMap(object):
     "Represents a mapping from record fields to note"
-    def __init__(self, fields_map, deck, model, anki_collection):
+    def __init__(self, fields_map, deck, model):
         self.fields_map = fields_map
         self.deck = deck
         self.model = model
-        self.anki_collection = anki_collection
 
     def note(self, record_fields):
         "Returns note obtained from record fields"
         return Note(
             self.fields_map.note_fields(record_fields),
             self.deck,
-            self.model,
-            self.anki_collection)
+            self.model)
 
 class NoteFieldsMap(object):
     "Represent a mapping from record fields to fields of a note"
@@ -78,37 +74,34 @@ class NoteFieldMap(object):
 
 class Deck(object):
     "Represents a deck"
-    def __init__(self, name, anki_collection):
-        self.name = name
-        self.anki_collection = anki_collection
+    def __init__(self, name):
+        self.name_ = name
 
-    def anki_deck(self):
-        "Returns an anki deck for this deck"
-        return self.anki_collection.decks.byName(self.name)
+    def name(self):
+        "Returns name of the deck"
+        return self.name_
 
 class NoteModel(object):
     "Represents a note model (type)"
-    def __init__(self, name, anki_collection):
-        self.name = name
-        self.anki_collection = anki_collection
+    def __init__(self, name):
+        self.name_ = name
 
-    def anki_model(self):
-        "Returns an anki model for this model"
-        return self.anki_collection.models.byName(self.name)
+    def name(self):
+        "Returns name of the model"
+        return self.name_
 
 class Note(object):
     "Represents a note"
-    def __init__(self, fields, deck, model, anki_collection):
+    def __init__(self, fields, deck, model):
         self.fields = fields
         self.deck = deck
         self.model = model
-        self.anki_collection = anki_collection
 
-    def add_to_anki_collection(self):
+    def add_to_anki_collection(self, anki_collection):
         "Adds note to the anki collection"
-        anki_deck = self.deck.anki_deck()
-        anki_model = self.model.anki_model()
-        self.anki_collection.models.setCurrent(anki_model)
+        anki_deck = anki_collection.decks.byName(self.deck.name())
+        anki_model = anki_collection.models.byName(self.model.name())
+        anki_collection.models.setCurrent(anki_model)
         anki_note = anki_deck.newNote()
         self.fields.fill(anki_note)
         anki_deck.addNote(anki_note)

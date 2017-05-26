@@ -9,7 +9,7 @@ class MassFile(object):
 
     def notes(self):
         "Returns sequence of notes read from the file"
-        for record in CsvFile(str(self.filepath)).records():
+        for record in CsvFile(self.filepath).records():
             for note in MassRecord(record, self.note_maps_by_names).notes():
                 yield note
 
@@ -70,7 +70,7 @@ class NoteFieldMap(object):
 
     def note_field(self, record_fields):
         "Returns a note field obtained from record fields"
-        return NoteField(self.name, record_fields[self.value_index_in_record_fields])
+        return NoteField(self.name, record_fields[self.value_index_in_record_fields].value())
 
 class Deck(object):
     "Represents a deck"
@@ -99,12 +99,14 @@ class Note(object):
 
     def add_to_anki_collection(self, anki_collection):
         "Adds note to the anki collection"
-        anki_deck = anki_collection.decks.byName(self.deck.name())
+        anki_deck_id = anki_collection.decks.id(self.deck.name(), False)
+        anki_collection.decks.select(anki_deck_id)
         anki_model = anki_collection.models.byName(self.model.name())
         anki_collection.models.setCurrent(anki_model)
-        anki_note = anki_deck.newNote()
-        self.fields.fill(anki_note)
-        anki_deck.addNote(anki_note)
+        anki_note = anki_collection.newNote()
+        for field in self.fields:
+            field.fill(anki_note)
+        anki_collection.addNote(anki_note)
 
 class NoteField(object):
     "Represent a note field, with name and value"
@@ -123,7 +125,7 @@ class CsvFile(object):
 
     def records(self):
         "Returns sequence of records read from the file"
-        with open(str(self.filepath), 'rb') as _file:
+        with open(self.filepath, 'rb') as _file:
             for fields in csv.reader(_file):
                 yield CsvRecord([CsvField(field) for field in fields])
 
@@ -143,4 +145,4 @@ class CsvField(object):
 
     def value(self):
         "Returns value contained within the field"
-        return self._value
+        return unicode(self._value, 'utf-8-sig')

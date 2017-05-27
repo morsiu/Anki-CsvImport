@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 "Allows reading csv files"
 import csv
 

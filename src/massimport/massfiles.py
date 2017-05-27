@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 "Allows adding notes stored in mass files to Anki collections"
-import csv
 
 class MassFile(object):
     "Represents file containing notes, of many decks and note types"

@@ -1,9 +1,11 @@
-"Mass note import addon to Anki"
 # -*- coding: utf-8 -*-
+"Mass note import addon to Anki"
 from aqt import mw
 import aqt.qt
-from massfiles import *
-from csvfile import CsvFile
+from massimport.csvfiles import CsvFile
+from massimport.massfiles import MassFile
+from massimport.massfiles import NotesMap, NoteMap, NoteFieldsMap, NoteFieldMap
+from massimport.massfiles import Deck, NoteModel
 
 def note_maps():
     return {

@@ -3,13 +3,13 @@ import csv
 
 class MassFile(object):
     "Represents file containing notes, of many decks and note types"
-    def __init__(self, filepath, note_maps_by_names):
-        self.filepath = filepath
+    def __init__(self, file_, note_maps_by_names):
+        self.file = file_
         self.note_maps_by_names = note_maps_by_names
 
     def notes(self):
         "Returns sequence of notes read from the file"
-        for record in CsvFile(self.filepath).records():
+        for record in self.file.records():
             for note in MassRecord(record, self.note_maps_by_names).notes():
                 yield note
 
@@ -118,31 +118,3 @@ class NoteField(object):
         "Stores the field name and value in a mapping"
         mapping[self.name] = self.value
 
-class CsvFile(object):
-    "Represents file containing records, in csv format, consisting of fields"
-    def __init__(self, filepath):
-        self.filepath = filepath
-
-    def records(self):
-        "Returns sequence of records read from the file"
-        with open(self.filepath, 'rb') as _file:
-            for fields in csv.reader(_file):
-                yield CsvRecord([CsvField(field) for field in fields])
-
-class CsvRecord(object):
-    "Represents a csv record, consisting of fields"
-    def __init__(self, fields):
-        self._fields = fields
-
-    def fields(self):
-        "Returns fields contained in the record"
-        return self._fields
-
-class CsvField(object):
-    "Represents a csv field, containing a value"
-    def __init__(self, value):
-        self._value = value
-
-    def value(self):
-        "Returns value contained within the field"
-        return unicode(self._value, 'utf-8-sig')

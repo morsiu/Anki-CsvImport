@@ -14,10 +14,6 @@ class AnkiNoteCollection(object):
         self.anki_collection.models.setCurrent(anki_model)
         anki_note = self.anki_collection.newNote(False)
         for field in note.fields():
-            self.fill_anki_note(anki_note, field)
+            anki_note[field.name()] = field.value()
         if anki_note.dupeOrEmpty() is False:
             self.anki_collection.addNote(anki_note)
-
-    def fill_anki_note(self, mapping, field):
-        "Stores the field in a mapping"
-        mapping[field.name()] = field.value()

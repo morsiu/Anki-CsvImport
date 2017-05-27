@@ -1,0 +1,6 @@
+set ANKI_ADDONS_PATH=%APPDATA%\Anki2\addons
+set ANKI_MASSIMPORT_ADDON_PATH=%ANKI_ADDONS_PATH%\massimport
+del /f /s /q %ANKI_MASSIMPORT_ADDON_PATH%
+mkdir %ANKI_MASSIMPORT_ADDON_PATH%
+copy src\massimport\*.* %ANKI_MASSIMPORT_ADDON_PATH%
+copy /y src\massimport-addon.py %ANKI_ADDONS_PATH%

@@ -70,7 +70,9 @@ class NoteFieldMap(object):
 
     def note_field(self, record_fields):
         "Returns a note field obtained from record fields"
-        return NoteField(self.name, record_fields[self.value_index_in_record_fields].value())
+        return NoteField(
+            self.name,
+            record_fields[self.value_index_in_record_fields].value())
 
 class Deck(object):
     "Represents a deck"
@@ -93,28 +95,32 @@ class NoteModel(object):
 class Note(object):
     "Represents a note"
     def __init__(self, fields, deck, model):
-        self.fields = fields
-        self.deck = deck
-        self.model = model
+        self.fields_ = fields
+        self.deck_ = deck
+        self.model_ = model
 
-    def add_to_anki_collection(self, anki_collection):
-        "Adds note to the anki collection"
-        anki_deck_id = anki_collection.decks.id(self.deck.name(), False)
-        anki_collection.decks.select(anki_deck_id)
-        anki_model = anki_collection.models.byName(self.model.name())
-        anki_collection.models.setCurrent(anki_model)
-        anki_note = anki_collection.newNote()
-        for field in self.fields:
-            field.fill(anki_note)
-        anki_collection.addNote(anki_note)
+    def fields(self):
+        "Returns fields of the note"
+        return self.fields_
+
+    def deck(self):
+        "Returns deck to which the note belongs"
+        return self.deck_
+
+    def model(self):
+        "Returns model of the note"
+        return self.model_
 
 class NoteField(object):
     "Represent a note field, with name and value"
     def __init__(self, name, value):
-        self.name = name
-        self.value = value
+        self.name_ = name
+        self.value_ = value
 
-    def fill(self, mapping):
-        "Stores the field name and value in a mapping"
-        mapping[self.name] = self.value
+    def name(self):
+        "Returns name of the field"
+        return self.name_
 
+    def value(self):
+        "Returns value of the field"
+        return self.value_

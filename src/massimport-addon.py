@@ -2,10 +2,9 @@
 "Mass note import addon to Anki"
 from aqt import mw
 import aqt.qt
+from massimport.massfiles import *
 from massimport.csvfiles import CsvFile
-from massimport.massfiles import MassFile
-from massimport.massfiles import NotesMap, NoteMap, NoteFieldsMap, NoteFieldMap
-from massimport.massfiles import Deck, NoteModel
+from massimport.collections import AnkiNoteCollection
 
 def note_maps():
     return {
@@ -42,10 +41,13 @@ def note_maps():
     }
 
 def mass_import():
-    anki_collection = mw.col
-    mass_file = MassFile(CsvFile(u"C:\\users\\morsk\\Documents\\Słówka\\notes.csv"), note_maps())
+    mass_file = \
+        MassFile(
+            CsvFile(u"C:\\users\\morsk\\Documents\\Projects\\Słówka do Anki\\notes.csv"),
+            note_maps())
+    collection = AnkiNoteCollection(mw.col)
     for note in mass_file.notes():
-        note.add_to_anki_collection(anki_collection)
+        collection.add_note(note)
 
 action = aqt.qt.QAction("Mass import", mw)
 action.triggered.connect(mass_import)

@@ -11,29 +11,54 @@ def note_maps():
         "dsubs": NotesMap(
             [NoteMap(
                 NoteFieldsMap([
-                    NoteFieldMap("Artikel", 1),
-                    NoteFieldMap("Deutsch", 2),
-                    NoteFieldMap("Deutsch Plural", 3),
-                    NoteFieldMap("Polski", 4),
-                    NoteFieldMap("Polski Plural", 5)
+                    NoteFieldMap(u"Artikel", 1),
+                    NoteFieldMap(u"Deutsch", 2),
+                    NoteFieldMap(u"Deutsch Plural", 3),
+                    NoteFieldMap(u"Polski", 4),
+                    NoteFieldMap(u"Polski Plural", 5)
                 ]),
                 Deck(u"Deutsch::Wörter"),
-                NoteModel(u"Deutsch Substantiv"))
-            ]),
+                NoteModel(u"Deutsch Substantiv")
+            )]
+        ),
         "da": NotesMap(
             [NoteMap(
                 NoteFieldsMap([
-                    NoteFieldMap("Front", 1),
-                    NoteFieldMap("Back", 2)
+                    NoteFieldMap(u"Front", 1),
+                    NoteFieldMap(u"Back", 2)
                 ]),
                 Deck(u"Deutsch::Aussprache"),
-                NoteModel(u"Deutsch Aussprache"))
-            ]),
+                NoteModel(u"Deutsch Aussprache")
+            )]
+        ),
+        "dv": NotesMap(
+            [NoteMap(
+                NoteFieldsMap([
+                    NoteFieldMap(u"Deutsch Infinitiv", 1),
+                    NoteFieldMap(u"Polski", 2)
+                ]),
+                Deck(u"Deutsch::Wörter"),
+                NoteModel(u"Deutsch Verb")
+            )]
+        ),
+        "dsv": NotesMap(
+            [NoteMap(
+                NoteFieldsMap([
+                    NoteFieldMap(u"Deutsch Infinitiv", 1),
+                    NoteFieldMap(u"Deutsch Präsens", 2),
+                    NoteFieldMap(u"Deutsch Präteritum", 3),
+                    NoteFieldMap(u"Deutsch Partizip II", 4),
+                    NoteFieldMap(u"Polski", 5)
+                ]),
+                Deck(u"Deutsch::Wörter"),
+                NoteModel(u"Deutsch Verb")
+            )]
+        ),
         "def": NotesMap(
             [NoteMap(
                 NoteFieldsMap([
-                    NoteFieldMap("Deutsch", 1),
-                    NoteFieldMap("Polski", 2)
+                    NoteFieldMap(u"Deutsch", 1),
+                    NoteFieldMap(u"Polski", 2)
                 ]),
                 Deck(u"Deutsch::Wörter"),
                 NoteModel(u"Deutsch Einfach"))

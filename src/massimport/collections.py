@@ -15,5 +15,5 @@ class AnkiNoteCollection(object):
         anki_note = self.anki_collection.newNote(False)
         for field in note.fields():
             anki_note[field.name()] = field.value()
-        if anki_note.dupeOrEmpty() is False:
+        if anki_note.dupeOrEmpty() == 0:
             self.anki_collection.addNote(anki_note)

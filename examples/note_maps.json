@@ -1,0 +1,146 @@
+{
+    "dsubs": [
+        {
+            "fields": [
+                {
+                    "name": "Artikel",
+                    "index": 1
+                },
+                {
+                    "name": "Deutsch",
+                    "index": 2
+                },
+                {
+                    "name": "Deutsch Plural",
+                    "index": 3
+                },
+                {
+                    "name": "Polski",
+                    "index": 4
+                },
+                {
+                    "name": "Polski Plural",
+                    "index": 5
+                }
+            ],
+            "deck": "Deutsch::Wörter",
+            "note_model": "Deutsch Substantiv"
+        }
+    ],
+    "dsubsp": [
+        {
+            "fields": [
+                {
+                    "name": "Artikel",
+                    "index": 1
+                },
+                {
+                    "name": "Deutsch",
+                    "index": 2
+                },
+                {
+                    "name": "Deutsch Plural",
+                    "index": 3
+                },
+                {
+                    "name": "Polski Plural",
+                    "index": 4
+                }
+            ],
+            "deck": "Deutsch::Wörter",
+            "note_model": "Deutsch Substantiv Plural"
+        }
+    ],
+    "da": [
+        {
+            "fields": [
+                {
+                    "name": "Front",
+                    "index": 1
+                },
+                {
+                    "name": "Back",
+                    "index": 2
+                }
+            ],
+            "deck": "Deutsch::Aussprache",
+            "note_model": "Deutsch Aussprache"
+        }
+    ],
+    "dsv": [
+        {
+            "fields": [
+                {
+                    "name": "Deutsch Infinitiv",
+                    "index": 1
+                },
+                {
+                    "name": "Deutsch Präteritum",
+                    "index": 2
+                },
+                {
+                    "name": "Deutsch Partizip II",
+                    "index": 3
+                },
+                {
+                    "name": "Deutsch Präsens",
+                    "index": 4
+                }
+            ],
+            "deck": "Deutsch::Wörter",
+            "note_model": "Deutsch Verb Konjunktion"
+        }
+    ],
+    "def": [
+        {
+            "fields": [
+                {
+                    "name": "Deutsch",
+                    "index": 1
+                },
+                {
+                    "name": "Polski",
+                    "index": 2
+                }
+            ],
+            "deck": "Deutsch::Wörter",
+            "note_model": "Deutsch Einfach"
+        }
+    ],
+    "ew": [
+        {
+            "fields": [
+                {
+                    "name": "Word",
+                    "index": 1
+                },
+                {
+                    "name": "Explanation",
+                    "index": 2
+                },
+                {
+                    "name": "Pronunciation",
+                    "index": 3
+                }
+            ],
+            "deck": "English::Words",
+            "note_model": "English Word"
+        }
+    ],
+    "epv": [
+        {
+            "fields": [
+                {
+                    "name": "Text",
+                    "index": 1
+                },
+                {
+                    "name": "Extra",
+                    "index": 2
+                }
+            ],
+            "deck": "English::Words",
+            "note_model": "English Phrasal Verb"
+        }
+    ]
+}

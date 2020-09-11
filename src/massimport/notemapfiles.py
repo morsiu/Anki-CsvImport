@@ -6,11 +6,13 @@ import json
 
 
 class NoteMapJsonFile(object):
+    "Represents note maps stored in JSON file"
+
     def __init__(self, filepath):
         self.filepath = filepath
 
     def notes_maps(self):
-        "Returns note maps model read from file"
+        "Returns note maps read from file"
         with open(self.filepath, 'r', encoding='utf_8') as _file:
             notes_maps_dict = json.load(_file)
             return {key: self.notes_map(note_map_array)
@@ -35,4 +37,5 @@ class NoteMapJsonFile(object):
                               for note_field_dict in note_field_array])
 
     def note_field_map(self, note_field_dict):
+        "Maps field map to a NoteFieldMap"
         return NoteFieldMap(note_field_dict["name"], note_field_dict["index"])

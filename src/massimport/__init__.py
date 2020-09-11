@@ -7,19 +7,16 @@ from .csvfiles import CsvFile
 from .collections import AnkiNoteCollection
 from .notemapfiles import NoteMapJsonFile
 
+config = mw.addonManager.getConfig(__name__)
+
 
 def notes_maps():
-    file = NoteMapJsonFile(
-        u"C:\\Users\\morsk\\OneDrive\\Projects\\Słówka do Anki\\note_maps.json")
+    file = NoteMapJsonFile(config["note_maps"])
     return file.notes_maps()
 
 
 def mass_import():
-    mass_file = \
-        MassFile(
-            CsvFile(
-                u"C:\\Users\\morsk\\OneDrive\\Projects\\Słówka do Anki\\notes.csv"),
-            notes_maps())
+    mass_file = MassFile(CsvFile(config["notes"]), notes_maps())
     collection = AnkiNoteCollection(mw.col)
     for note in mass_file.notes():
         collection.add_note(note)

@@ -9,7 +9,7 @@ class CsvFile(object):
 
     def records(self):
         "Returns sequence of records read from the file"
-        with open(self.filepath, 'r', encoding='utf_8', newline='') as _file:
+        with open(self.filepath, 'r', encoding='utf-8-sig', newline='') as _file:
             for fields in csv.reader(_file):
                 yield CsvRecord([CsvField(field) for field in fields])
 

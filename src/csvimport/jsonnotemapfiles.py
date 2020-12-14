@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 "Allows reading note maps from JSON files"
 
-from .model import Deck, NoteFieldMap, NoteFieldsMap, NoteMap, NotesMap, NoteModel
+from .anki import AnkiDeck, AnkiNoteModel
+from .notemaps import NoteFieldMap, NoteFieldsMap, NoteMap, NotesMap
 import json
 
 
@@ -27,8 +28,8 @@ class JsonNoteMapFile(object):
         "Maps note map dict to a NoteMap"
         return NoteMap(
             self.note_fields_map(note_map_dict["fields"]),
-            Deck(note_map_dict["deck"]),
-            NoteModel(note_map_dict["note_model"])
+            AnkiDeck(note_map_dict["deck"]),
+            AnkiNoteModel(note_map_dict["note_model"])
         )
 
     def note_fields_map(self, note_field_array):

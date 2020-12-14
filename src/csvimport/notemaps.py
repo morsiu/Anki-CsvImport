@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 "Allows mapping of records, consisting of fields, to multiple notes"
+from .anki import AnkiNote, AnkiNoteField
 
 
 class NotesMap(object):
@@ -23,7 +24,7 @@ class NoteMap(object):
 
     def note(self, record_fields):
         "Returns note obtained from record fields"
-        return Note(
+        return AnkiNote(
             self.fields_map.note_fields(record_fields),
             self.deck,
             self.model)
@@ -52,65 +53,6 @@ class NoteFieldMap(object):
 
     def note_field(self, record_fields):
         "Returns a note field obtained from record fields"
-        return NoteField(
+        return AnkiNoteField(
             self.name,
             record_fields[self.value_index_in_record_fields].value())
-
-
-class Deck(object):
-    "Represents a deck"
-
-    def __init__(self, name):
-        self.name_ = name
-
-    def name(self):
-        "Returns name of the deck"
-        return self.name_
-
-
-class NoteModel(object):
-    "Represents a note model (type)"
-
-    def __init__(self, name):
-        self.name_ = name
-
-    def name(self):
-        "Returns name of the model"
-        return self.name_
-
-
-class Note(object):
-    "Represents a note"
-
-    def __init__(self, fields, deck, model):
-        self.fields_ = fields
-        self.deck_ = deck
-        self.model_ = model
-
-    def fields(self):
-        "Returns fields of the note"
-        return self.fields_
-
-    def deck(self):
-        "Returns deck to which the note belongs"
-        return self.deck_
-
-    def model(self):
-        "Returns model of the note"
-        return self.model_
-
-
-class NoteField(object):
-    "Represent a note field, with name and value"
-
-    def __init__(self, name, value):
-        self.name_ = name
-        self.value_ = value
-
-    def name(self):
-        "Returns name of the field"
-        return self.name_
-
-    def value(self):
-        "Returns value of the field"
-        return self.value_

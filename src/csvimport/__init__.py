@@ -2,9 +2,8 @@
 "Package for importing notes from CSV files into Anki"
 from aqt import mw
 import aqt.qt
-from .model import *
+from .anki import AnkiNoteCollection
 from .csvnotefiles import CsvNoteFile
-from .collections import AnkiNoteCollection
 from .jsonnotemapfiles import JsonNoteMapFile
 
 config = mw.addonManager.getConfig(__name__)

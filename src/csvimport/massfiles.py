@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 "Allows adding notes stored in mass files to Anki collections"
 
+
 class MassFile(object):
     "Represents file containing notes, of many decks and note types"
+
     def __init__(self, file_, note_maps_by_names):
         self.file = file_
         self.note_maps_by_names = note_maps_by_names
@@ -13,8 +15,10 @@ class MassFile(object):
             for note in MassRecord(record, self.note_maps_by_names).notes():
                 yield note
 
+
 class MassRecord(object):
     "Represents a record in mass file, containing multiple notes"
+
     def __init__(self, record, note_maps_by_names):
         self.record = record
         self.note_maps_by_names = note_maps_by_names
@@ -27,8 +31,10 @@ class MassRecord(object):
         "Returns note map assigned to this record"
         return self.note_maps_by_names[self.record.fields()[0].value()]
 
+
 class NotesMap(object):
     "Represents a mapping from record fields to notes"
+
     def __init__(self, note_maps):
         self.note_maps = note_maps
 
@@ -36,8 +42,10 @@ class NotesMap(object):
         "Returns notes contained within the record"
         return [note_map.note(record_fields) for note_map in self.note_maps]
 
+
 class NoteMap(object):
     "Represents a mapping from record fields to note"
+
     def __init__(self, fields_map, deck, model):
         self.fields_map = fields_map
         self.deck = deck
@@ -50,8 +58,10 @@ class NoteMap(object):
             self.deck,
             self.model)
 
+
 class NoteFieldsMap(object):
     "Represent a mapping from record fields to fields of a note"
+
     def __init__(self, note_field_maps):
         self.note_field_maps = note_field_maps
 
@@ -62,8 +72,10 @@ class NoteFieldsMap(object):
             for note_field_map
             in self.note_field_maps]
 
+
 class NoteFieldMap(object):
     "Represents a map of record field value to note field value"
+
     def __init__(self, name, value_index_in_record_fields):
         self.name = name
         self.value_index_in_record_fields = value_index_in_record_fields
@@ -74,8 +86,10 @@ class NoteFieldMap(object):
             self.name,
             record_fields[self.value_index_in_record_fields].value())
 
+
 class Deck(object):
     "Represents a deck"
+
     def __init__(self, name):
         self.name_ = name
 
@@ -83,8 +97,10 @@ class Deck(object):
         "Returns name of the deck"
         return self.name_
 
+
 class NoteModel(object):
     "Represents a note model (type)"
+
     def __init__(self, name):
         self.name_ = name
 
@@ -92,8 +108,10 @@ class NoteModel(object):
         "Returns name of the model"
         return self.name_
 
+
 class Note(object):
     "Represents a note"
+
     def __init__(self, fields, deck, model):
         self.fields_ = fields
         self.deck_ = deck
@@ -111,8 +129,10 @@ class Note(object):
         "Returns model of the note"
         return self.model_
 
+
 class NoteField(object):
     "Represent a note field, with name and value"
+
     def __init__(self, name, value):
         self.name_ = name
         self.value_ = value

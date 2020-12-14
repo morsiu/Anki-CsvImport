@@ -2,8 +2,10 @@
 "Allows reading csv files"
 import csv
 
+
 class CsvFile(object):
     "Represents file containing records, in csv format, consisting of fields"
+
     def __init__(self, filepath):
         self.filepath = filepath
 
@@ -13,8 +15,10 @@ class CsvFile(object):
             for fields in csv.reader(_file):
                 yield CsvRecord([CsvField(field) for field in fields])
 
+
 class CsvRecord(object):
     "Represents a csv record, consisting of fields"
+
     def __init__(self, fields):
         self._fields = fields
 
@@ -22,8 +26,10 @@ class CsvRecord(object):
         "Returns fields contained in the record"
         return self._fields
 
+
 class CsvField(object):
     "Represents a csv field, containing a value"
+
     def __init__(self, value):
         self._value = value
 

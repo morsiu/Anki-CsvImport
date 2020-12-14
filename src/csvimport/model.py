@@ -1,35 +1,5 @@
 # -*- coding: utf-8 -*-
-"Allows adding notes stored in mass files to Anki collections"
-
-
-class MassFile(object):
-    "Represents file containing notes, of many decks and note types"
-
-    def __init__(self, file_, note_maps_by_names):
-        self.file = file_
-        self.note_maps_by_names = note_maps_by_names
-
-    def notes(self):
-        "Returns sequence of notes read from the file"
-        for record in self.file.records():
-            for note in MassRecord(record, self.note_maps_by_names).notes():
-                yield note
-
-
-class MassRecord(object):
-    "Represents a record in mass file, containing multiple notes"
-
-    def __init__(self, record, note_maps_by_names):
-        self.record = record
-        self.note_maps_by_names = note_maps_by_names
-
-    def notes(self):
-        "Returns notes contained within the record"
-        return self.note_map().notes(self.record.fields())
-
-    def note_map(self):
-        "Returns note map assigned to this record"
-        return self.note_maps_by_names[self.record.fields()[0].value()]
+"Allows mapping of records, consisting of fields, to multiple notes"
 
 
 class NotesMap(object):

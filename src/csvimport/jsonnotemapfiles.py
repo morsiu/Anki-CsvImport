@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"Allows reading note maps from files"
+"Allows reading note maps from JSON files"
 
-from .massfiles import Deck, NoteFieldMap, NoteFieldsMap, NoteMap, NotesMap, NoteModel
+from .model import Deck, NoteFieldMap, NoteFieldsMap, NoteMap, NotesMap, NoteModel
 import json
 
 
-class NoteMapJsonFile(object):
+class JsonNoteMapFile(object):
     "Represents note maps stored in JSON file"
 
     def __init__(self, filepath):
